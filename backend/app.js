@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const mongodb = require('./db/connect');
@@ -14,6 +15,8 @@ app
     next();
   })
   .use('/professional', professionalRoutes);
+
+  app.use(express.static(path.join(__dirname, 'frontend')));
 
 mongodb.initDb((err, mongodb) => {
   if (err) {
